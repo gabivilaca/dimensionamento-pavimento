@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultado</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<div class="container mt-5">
+    <h2 class="mb-4">Resultado do Dimensionamento</h2>
+    <p><strong>Tipo de tráfego:</strong> {{ trafego }}</p>
+    <p><strong>Vida útil:</strong> {{ vida_util }} anos</p>
+    <p><strong>CBR:</strong> {{ cbr }}%</p>
+    <p><strong>N:</strong> {{ n }}</p>
+
+    <hr>
+    <h4>Espessuras Recomendadas:</h4>
+    <ul>
+        <li><strong>Revestimento:</strong> {{ revestimento }} cm</li>
+        <li><strong>Base:</strong> {{ base }} cm</li>
+        <li><strong>Sub-base:</strong> {{ sub_base }} cm</li>
+    </ul>
+
+    <hr>
+    <h5>Esquema do Pavimento:</h5>
+    <div style="border: 1px solid #333; width: 300px;">
+        <div style="height: {{ revestimento*5 }}px; background: #444; color: white; text-align: center;">Revestimento ({{ revestimento }} cm)</div>
+        <div style="height: {{ base*5 }}px; background: #888; color: white; text-align: center;">Base ({{ base }} cm)</div>
+        <div style="height: {{ sub_base*5 }}px; background: #ccc; color: black; text-align: center;">Sub-base ({{ sub_base }} cm)</div>
+    </div>
+
+    <br><a href="/" class="btn btn-secondary mt-3">Novo cálculo</a>
+</div>
+</body>
+</html>

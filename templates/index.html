@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Dimensionamento de Pavimento Flexível - DNIT 181/2006</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<div class="container mt-4">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <img src="{{ url_for('static', filename='logo_poli.png') }}" alt="Logo POLI" style="height: 70px;">
+        <img src="{{ url_for('static', filename='logo_ppges.png') }}" alt="Logo PPGES" style="height: 70px;">
+    </div>
+
+    <h2 class="text-center mb-3">Sistema de Dimensionamento de Pavimento Flexível</h2>
+
+    <p style="font-size: 16px; text-align: justify;">
+        Esta aplicação foi desenvolvida como ferramenta de apoio didático para o cálculo do Dimensionamento de Pavimento Flexível,
+        com base na norma <strong>DNIT 181/2006 – ES</strong>. O sistema utiliza as variáveis técnicas definidas no método oficial,
+        permitindo o cálculo baseado em parâmetros como número de repetições de carga e coeficientes estruturais dos materiais.
+    </p>
+
+    <hr>
+
+    <form method="post">
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="N" class="form-label">N (repetições de carga 80kN)</label>
+                <input type="number" name="N" id="N" class="form-control" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="CBRn" class="form-label">CBR do subleito (%)</label>
+                <input type="number" name="CBRn" id="CBRn" class="form-control" step="0.1" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="CBRSB" class="form-label">CBR da sub-base (%)</label>
+                <input type="number" name="CBRSB" id="CBRSB" class="form-control" step="0.1" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="KR" class="form-label">KR (coef. revestimento)</label>
+                <input type="number" name="KR" id="KR" class="form-control" step="0.01" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="KB" class="form-label">KB (coef. base)</label>
+                <input type="number" name="KB" id="KB" class="form-control" step="0.01" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="KSB" class="form-label">KSB (coef. sub-base)</label>
+                <input type="number" name="KSB" id="KSB" class="form-control" step="0.01" required>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Calcular</button>
+    </form>
+
+    <div style="margin-top: 40px; text-align: center;">
+        <h4>Tabela de Referência – DNIT 181/2006</h4>
+        <img src="{{ url_for('static', filename='tabela_dnit.png') }}" alt="Tabela DNIT" style="max-width: 100%; height: auto; border: 1px solid #ccc;">
+    </div>
+
+    <footer style="background-color: #f2f2f2; text-align: center; padding: 15px; font-size: 0.9em; margin-top: 50px; border-top: 1px solid #ccc;">
+        <p>
+            Aplicação desenvolvida por <strong>Maria Gabriella Vilaça Padilha Pinto</strong><br>
+            Programa de Pós-Graduação em Engenharia de Sistemas – PPGES<br>
+            Escola Politécnica de Pernambuco – UPE
+        </p>
+        <p>
+            Orientador: Prof. Dr. Pedro Eugênio Silva de Oliveira<br>
+            Supervisor do Estagiário<br>
+            Recife – PE, 2025
+        </p>
+    </footer>
+</div>
+
+</body>
+</html>
