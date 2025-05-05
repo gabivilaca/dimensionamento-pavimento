@@ -1,1 +1,27 @@
-Resultado gerado aqui com dados recebidos.
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultado</title>
+</head>
+<body>
+    <h1>Relatório Técnico</h1>
+    <p><strong>CBR:</strong> {{ cbr }}%</p>
+    <p><strong>N:</strong> {{ n }}</p>
+    <p><strong>K:</strong> {{ k }}</p>
+    <p><strong>Espessura total (H):</strong> {{ h }} cm</p>
+    <p><strong>H1 (Revestimento):</strong> {{ h1 }} cm</p>
+    <p><strong>H2 (Base):</strong> {{ h2 }} cm</p>
+    <p><strong>H3 (Sub-base):</strong> {{ h3 }} cm</p>
+    <form action="/gerar_pdf" method="post">
+        <input type="hidden" name="cbr" value="{{ cbr }}">
+        <input type="hidden" name="n" value="{{ n }}">
+        <input type="hidden" name="k" value="{{ k }}">
+        <input type="hidden" name="h" value="{{ h }}">
+        <input type="hidden" name="h1" value="{{ h1 }}">
+        <input type="hidden" name="h2" value="{{ h2 }}">
+        <input type="hidden" name="h3" value="{{ h3 }}">
+        <button type="submit">Gerar PDF</button>
+    </form>
+</body>
+</html>

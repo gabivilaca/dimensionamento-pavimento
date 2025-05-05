@@ -1,1 +1,16 @@
-<form method='POST' action='/resultado'>Simulação aqui</form>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Dimensionamento de Pavimento</title>
+</head>
+<body>
+    <h1>Dimensionamento de Pavimento</h1>
+    <form action="/resultado" method="post">
+        <label>CBR (%): <input type="number" name="cbr" step="0.01" required></label><br>
+        <label>N (Número de Eixos): <input type="number" name="n" step="0.01" required></label><br>
+        <label>K (Coeficiente estrutural): <input type="number" name="k" step="0.01" required></label><br>
+        <button type="submit">Calcular</button>
+    </form>
+</body>
+</html>
