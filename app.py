@@ -1,6 +1,8 @@
+
 from flask import Flask, render_template, request, send_file
 import pdfkit
 import os
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -11,36 +13,28 @@ def index():
 @app.route('/resultado', methods=['POST'])
 def resultado():
     try:
-        cbr = float(request.form['cbr'])
-        n = float(request.form['n'])
-        k = float(request.form['k'])
+        N = float(request.form['N'])
+        CBRn = float(request.form['CBRn'])
+        CBRSB = float(request.form['CBRSB'])
+        KR = float(request.form['KR'])
+        KB = float(request.form['KB'])
+        KSB = float(request.form['KSB'])
 
-        ht = 77.67 * (n**0.0442) * (cbr**-0.2654)
-        h = round(ht, 2)
+        # Cálculo de cada camada
+        hR = ((N / (CBRn * KR)) ** 0.25) * 10
+        hB = ((N / (CBRSB * KB)) ** 0.25) * 10
+        hSB = ((N / (CBRSB * KSB)) ** 0.25) * 10
 
-        h1 = round(h * k / 10, 2)
-        h2 = round((h - h1) / 2, 2)
-        h3 = round(h - h1 - h2, 2)
+        # Gera relatório PDF
+        rendered = render_template('resultado.html', N=N, CBRn=CBRn, CBRSB=CBRSB, KR=KR, KB=KB, KSB=KSB, hR=hR, hB=hB, hSB=hSB, data=datetime.now())
+        path_wkhtmltopdf = '/usr/bin/wkhtmltopdf'
+        config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf) if os.path.exists(path_wkhtmltopdf) else None
+        pdfkit.from_string(rendered, 'relatorio.pdf', configuration=config)
 
-        return render_template('resultado.html', h=h, h1=h1, h2=h2, h3=h3, cbr=cbr, n=n, k=k)
+        return send_file('relatorio.pdf', as_attachment=True)
+
     except Exception as e:
-        return f"Erro nos cálculos: {e}"
-
-@app.route('/gerar_pdf', methods=['POST'])
-def gerar_pdf():
-    rendered = render_template('resultado.html',
-        h=request.form['h'],
-        h1=request.form['h1'],
-        h2=request.form['h2'],
-        h3=request.form['h3'],
-        cbr=request.form['cbr'],
-        n=request.form['n'],
-        k=request.form['k']
-    )
-    path_wkhtmltopdf = '/usr/bin/wkhtmltopdf' if os.name != 'nt' else r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
-    config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
-    pdfkit.from_string(rendered, 'relatorio.pdf', configuration=config)
-    return send_file('relatorio.pdf', as_attachment=True)
+        return f"Ocorreu um erro: {e}"
 
 if __name__ == '__main__':
     app.run(debug=True)

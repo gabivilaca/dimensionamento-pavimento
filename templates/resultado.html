@@ -1,27 +1,42 @@
+
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Resultado</title>
+    <title>Relatório de Dimensionamento</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        header img { height: 60px; margin-right: 20px; }
+        h1, h2 { color: #003366; }
+        table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+        table, th, td { border: 1px solid black; }
+        th, td { padding: 8px; text-align: center; }
+    </style>
 </head>
 <body>
-    <h1>Relatório Técnico</h1>
-    <p><strong>CBR:</strong> {{ cbr }}%</p>
-    <p><strong>N:</strong> {{ n }}</p>
-    <p><strong>K:</strong> {{ k }}</p>
-    <p><strong>Espessura total (H):</strong> {{ h }} cm</p>
-    <p><strong>H1 (Revestimento):</strong> {{ h1 }} cm</p>
-    <p><strong>H2 (Base):</strong> {{ h2 }} cm</p>
-    <p><strong>H3 (Sub-base):</strong> {{ h3 }} cm</p>
-    <form action="/gerar_pdf" method="post">
-        <input type="hidden" name="cbr" value="{{ cbr }}">
-        <input type="hidden" name="n" value="{{ n }}">
-        <input type="hidden" name="k" value="{{ k }}">
-        <input type="hidden" name="h" value="{{ h }}">
-        <input type="hidden" name="h1" value="{{ h1 }}">
-        <input type="hidden" name="h2" value="{{ h2 }}">
-        <input type="hidden" name="h3" value="{{ h3 }}">
-        <button type="submit">Gerar PDF</button>
-    </form>
+    <header>
+        <img src="{{ url_for('static', filename='logo_poli.png') }}">
+        <img src="{{ url_for('static', filename='logo_ppges.png') }}">
+    </header>
+    <h1>Relatório de Dimensionamento de Pavimento</h1>
+    <p><strong>Data:</strong> {{ data.strftime('%d/%m/%Y %H:%M') }}</p>
+    <h2>Parâmetros Inseridos</h2>
+    <ul>
+        <li>N = {{ N }}</li>
+        <li>CBRn = {{ CBRn }}</li>
+        <li>CBRSB = {{ CBRSB }}</li>
+        <li>KR = {{ KR }}</li>
+        <li>KB = {{ KB }}</li>
+        <li>KSB = {{ KSB }}</li>
+    </ul>
+    <h2>Espessuras Calculadas</h2>
+    <table>
+        <tr><th>Camada</th><th>Espessura (cm)</th></tr>
+        <tr><td>Reforço</td><td>{{ hR|round(2) }}</td></tr>
+        <tr><td>Base</td><td>{{ hB|round(2) }}</td></tr>
+        <tr><td>Subleito</td><td>{{ hSB|round(2) }}</td></tr>
+    </table>
+    <h2>Tabela de Referência do DNIT</h2>
+    <img src="{{ url_for('static', filename='tabela_dnit.png') }}" style="width: 100%; margin-top: 20px;">
 </body>
 </html>

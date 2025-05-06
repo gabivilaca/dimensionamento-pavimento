@@ -1,4 +1,4 @@
 flask
 pdfkit
-Jinja2
 gunicorn
+Jinja2

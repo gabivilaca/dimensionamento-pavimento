@@ -1,16 +1,31 @@
+
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <title>Dimensionamento de Pavimento</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Dimensionamento de Pavimento</h1>
+    <header>
+        <img src="{{ url_for('static', filename='logo_poli.png') }}" alt="Logo POLI">
+        <img src="{{ url_for('static', filename='logo_ppges.png') }}" alt="Logo PPGES">
+        <h1>Dimensionamento de Pavimento Flexível</h1>
+    </header>
     <form action="/resultado" method="post">
-        <label>CBR (%): <input type="number" name="cbr" step="0.01" required></label><br>
-        <label>N (Número de Eixos): <input type="number" name="n" step="0.01" required></label><br>
-        <label>K (Coeficiente estrutural): <input type="number" name="k" step="0.01" required></label><br>
-        <button type="submit">Calcular</button>
+        <label>N (Número de Repetições de Carga):</label><br>
+        <input type="number" name="N" required step="any"><br>
+        <label>CBRn (CBR da camada de Reforço):</label><br>
+        <input type="number" name="CBRn" required step="any"><br>
+        <label>CBRSB (CBR do Subleito):</label><br>
+        <input type="number" name="CBRSB" required step="any"><br>
+        <label>KR (Constante da Camada de Reforço):</label><br>
+        <input type="number" name="KR" required step="any"><br>
+        <label>KB (Constante da Base):</label><br>
+        <input type="number" name="KB" required step="any"><br>
+        <label>KSB (Constante do Subleito):</label><br>
+        <input type="number" name="KSB" required step="any"><br><br>
+        <button type="submit">Calcular e Gerar Relatório</button>
     </form>
 </body>
 </html>
