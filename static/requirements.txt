@@ -1,4 +1,0 @@
-flask
-pdfkit
-gunicorn
-Jinja2
