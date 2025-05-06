@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Relatório de Dimensionamento</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        header img { height: 60px; margin-right: 20px; }
+        h1, h2 { color: #003366; }
+        table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+        table, th, td { border: 1px solid black; }
+        th, td { padding: 8px; text-align: center; }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="{{ url_for('static', filename='logo_poli.png') }}">
+        <img src="{{ url_for('static', filename='logo_ppges.png') }}">
+    </header>
+    <h1>Relatório de Dimensionamento de Pavimento</h1>
+    <p><strong>Data:</strong> {{ data.strftime('%d/%m/%Y %H:%M') }}</p>
+    <h2>Parâmetros Inseridos</h2>
+    <ul>
+        <li>N = {{ N }}</li>
+        <li>CBRn = {{ CBRn }}</li>
+        <li>CBRSB = {{ CBRSB }}</li>
+        <li>KR = {{ KR }}</li>
+        <li>KB = {{ KB }}</li>
+        <li>KSB = {{ KSB }}</li>
+    </ul>
+    <h2>Espessuras Calculadas</h2>
+    <table>
+        <tr><th>Camada</th><th>Espessura (cm)</th></tr>
+        <tr><td>Reforço</td><td>{{ hR|round(2) }}</td></tr>
+        <tr><td>Base</td><td>{{ hB|round(2) }}</td></tr>
+        <tr><td>Subleito</td><td>{{ hSB|round(2) }}</td></tr>
+    </table>
+    <h2>Tabela de Referência do DNIT</h2>
+    <img src="{{ url_for('static', filename='tabela_dnit.png') }}" style="width: 100%; margin-top: 20px;">
+</body>
+</html>
