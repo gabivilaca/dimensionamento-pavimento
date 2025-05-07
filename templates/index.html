@@ -1,47 +1,51 @@
+
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <title>Dimensionamento de Pavimento Flexível</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <div class="container">
+    <header>
         <div class="logo-container">
-            <img src="{{ url_for('static', filename='logo_ppges.png') }}" height="50">
-            <img src="{{ url_for('static', filename='logo_poli.png') }}" height="50">
+            <img src="/static/logo_poli.png" alt="Logo POLI" class="logo">
+            <img src="/static/logo_ppges.png" alt="Logo PPGES" class="logo">
         </div>
-        <h1>Ferramenta para cálculo da espessura do pavimento flexível</h1>
-        <p>Esta ferramenta tem como objetivo auxiliar no cálculo da espessura das camadas que compõem o pavimento flexível, com base nos parâmetros técnicos definidos pelo DNIT. É um sistema interativo criado para fins educacionais PPGES - POLI/UPE.</p>
+        <h1>Ferramenta para Cálculo de Espessura de Pavimento Flexível</h1>
+    </header>
+    <main>
         <form method="post">
-            <input type="text" name="N" placeholder="Tráfego (eixos)">
-            <input type="text" name="CBRn" placeholder="CBR (%)">
-            <input type="text" name="KR" placeholder="Coeficiente Estrutural">
-            <input type="text" name="CBRsb" placeholder="CBR do Subleito">
-            <input type="text" name="KB" placeholder="Espessura Inicial (cm)">
-            <input type="text" name="KSB" placeholder="Fator K">
+            <div class="input-grid">
+                <label for="carga">Carga (KN):</label>
+                <input type="number" step="any" name="carga" required>
+                <label for="fator">Fator de Equivalência:</label>
+                <input type="number" step="any" name="fator" required>
+                <label for="trafego">Tráfego (número de veículos):</label>
+                <input type="number" step="any" name="trafego" required>
+            </div>
             <button type="submit">Calcular</button>
         </form>
-        {% if resultado %}
-            {% if resultado.erro %}
-                <p style="color:red;">Erro: {{ resultado.erro }}</p>
-            {% else %}
-                <div class="resultado">
-                    <h2>Resultado do Dimensionamento</h2>
-                    <p>Altura da Camada de Reforço (Hr): {{ resultado.Hn }} cm</p>
-                    <p>Altura da Base (Hb): {{ resultado.Hb }} cm</p>
-                    <p>Altura do Subleito (Hsb): {{ resultado.Hsb }} cm</p>
-                    <img src="{{ url_for('static', filename='grafico_espessura.png') }}" alt="Gráfico das Camadas" style="width:100%;max-width:600px;">
-                </div>
-            {% endif %}
-        {% endif %}
-        <div class="tabela">
+
+        <div class="tabela-dnit">
             <h2>Tabela do DNIT</h2>
-            <img src="{{ url_for('static', filename='tabela_dnit.png') }}" alt="Tabela do DNIT" style="width:100%;max-width:800px;">
+            <img src="/static/tabela_dnit.png" alt="Tabela do DNIT" style="max-width: 100%;">
         </div>
-        <footer>
-            Desenvolvido por Maria Gabriella Vilaça | Orientação: Prof. Dr. Pedro Oliveira | POLI - PPGES/UPE
-        </footer>
-    </div>
+
+        {% if resultado %}
+        <div class="resultado">
+            <h2>Resultados</h2>
+            <ul>
+                <li>{{ resultado.explicacoes.hn }}: {{ resultado.hn }} cm</li>
+                <li>{{ resultado.explicacoes.hb }}: {{ resultado.hb }} cm</li>
+                <li>{{ resultado.explicacoes.hsb }}: {{ resultado.hsb }} cm</li>
+            </ul>
+            <img src="{{ grafico_path }}" alt="Gráfico de Camadas" style="max-height: 300px;">
+        </div>
+        {% endif %}
+    </main>
+    <footer>
+        <p>Desenvolvido por Maria Gabriella Vilaça | Orientação: Prof. Dr. Pedro Oliveira | POLI - PPGES/UPE</p>
+    </footer>
 </body>
 </html>
