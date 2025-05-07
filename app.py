@@ -1,4 +1,3 @@
-
 from flask import Flask, render_template, request
 import matplotlib.pyplot as plt
 import os
@@ -47,7 +46,7 @@ def index():
             ax.legend()
 
             grafico_path = os.path.join('static', 'grafico.png')
-            plt.savefig(os.path.join('static', 'grafico.png'), bbox_inches='tight')
+            plt.savefig(grafico_path, bbox_inches='tight')
             plt.close()
 
         except Exception as e:
@@ -55,5 +54,8 @@ def index():
 
     return render_template('index.html', resultado=resultado, grafico_path=grafico_path)
 
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+    from os import environ
+    port = int(environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)
+
