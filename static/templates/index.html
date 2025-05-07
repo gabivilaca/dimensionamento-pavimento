@@ -1,43 +1,34 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Dimensionamento de Pavimento</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Dimensionamento de Pavimento Flexível</title>
 </head>
 <body>
-<div class="container">
-    <div style="display: flex; justify-content: space-between; align-items: center;">
-        <img src="{{ url_for('static', filename='logo_poli.png') }}" class="logo">
-        <img src="{{ url_for('static', filename='logo_ppges.png') }}" class="logo">
+    <div style="text-align:center;">
+        <img src="{{ url_for('static', filename='logo_poli.png') }}" style="height: 60px;">
+        <img src="{{ url_for('static', filename='logo_ppges.png') }}" style="height: 60px;">
+        <h2>Ferramenta para Cálculo de Espessura de Pavimento Flexível</h2>
+        <p>Esta ferramenta tem como objetivo auxiliar no cálculo da espessura das camadas com base nos parâmetros definidos pelo DNIT.</p>
     </div>
-    <h1>Ferramenta para Cálculo da Espessura do Pavimento</h1>
-    <p>Esta ferramenta tem como objetivo auxiliar no cálculo da espessura das camadas que compõem o pavimento flexível, com base nos parâmetros técnicos definidos pelo DNIT. É um sistema interativo criado para fins educacionais PPGES - POLI/UPE.</p>
-    <form method="POST">
-        <input type="number" step="any" name="carga_por_eixo" placeholder="Carga por eixo (kN)" required>
-        <input type="number" step="any" name="numero_eixos" placeholder="Número de eixos" required>
-        <input type="number" step="any" name="coeficiente_fatiga" placeholder="Coeficiente de fadiga" required>
-        <input type="number" step="any" name="fator_equivalente" placeholder="Fator de equivalência" required>
-        <input type="number" step="any" name="modulo_resiliencia" placeholder="Módulo de resiliência (MPa)" required>
-        <input type="number" step="any" name="vida_projeto" placeholder="Vida útil do projeto (anos)" required>
+
+    <form method="POST" style="text-align:center; margin-top: 20px;">
+        <input type="text" name="R" placeholder="Espessura do Revestimento (R)" required><br><br>
+        <input type="text" name="CBRsb" placeholder="CBR Sub-base" required><br><br>
+        <input type="text" name="CBRn" placeholder="CBR Base" required><br><br>
+        <input type="text" name="KR" placeholder="KR" required><br><br>
+        <input type="text" name="KB" placeholder="KB" required><br><br>
+        <input type="text" name="KSB" placeholder="KSB" required><br><br>
         <button type="submit">Calcular</button>
     </form>
-    <img src="{{ url_for('static', filename='tabela_dnit.png') }}" style="width: 100%; margin-top: 20px;">
 
     {% if resultado %}
-        <div class="resultado">
-            <h2>Resultados</h2>
-            <p>{{ resultado.explicacoes.hn }}: <strong>{{ resultado.hn }} cm</strong></p>
-            <p>{{ resultado.explicacoes.hb }}: <strong>{{ resultado.hb }} cm</strong></p>
-            <p>{{ resultado.explicacoes.hsb }}: <strong>{{ resultado.hsb }} cm</strong></p>
-            {% if grafico_path %}
-                <img src="{{ url_for('static', filename='grafico.png') }}" style="margin-top: 20px;">
-            {% endif %}
-        </div>
+        <h3>Resultado do Dimensionamento</h3>
+        <p>Espessura do Revestimento (R): {{ resultado.R }} cm</p>
+        <p>Espessura da Base (B): {{ resultado.B }} cm</p>
+        <p>Espessura da Sub-base (Hsb): {{ resultado.Hsb }} cm</p>
+        <img src="{{ url_for('static', filename='grafico.png') }}" style="margin-top: 20px;">
     {% endif %}
-    <footer style="margin-top: 40px; font-size: 0.9em; text-align: center;">
-        Desenvolvido por Maria Gabriella Vilaça | Orientação: Prof. Dr. Pedro Oliveira | POLI - PPGES/UPE
-    </footer>
-</div>
 </body>
 </html>
