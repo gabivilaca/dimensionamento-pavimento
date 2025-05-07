@@ -1,31 +1,35 @@
 
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <title>Dimensionamento de Pavimento</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <header>
-        <img src="{{ url_for('static', filename='logo_poli.png') }}" alt="Logo POLI">
-        <img src="{{ url_for('static', filename='logo_ppges.png') }}" alt="Logo PPGES">
-        <h1>Dimensionamento de Pavimento Flexível</h1>
-    </header>
-    <form action="/resultado" method="post">
-        <label>N (Número de Repetições de Carga):</label><br>
-        <input type="number" name="N" required step="any"><br>
-        <label>CBRn (CBR da camada de Reforço):</label><br>
-        <input type="number" name="CBRn" required step="any"><br>
-        <label>CBRSB (CBR do Subleito):</label><br>
-        <input type="number" name="CBRSB" required step="any"><br>
-        <label>KR (Constante da Camada de Reforço):</label><br>
-        <input type="number" name="KR" required step="any"><br>
-        <label>KB (Constante da Base):</label><br>
-        <input type="number" name="KB" required step="any"><br>
-        <label>KSB (Constante do Subleito):</label><br>
-        <input type="number" name="KSB" required step="any"><br><br>
-        <button type="submit">Calcular e Gerar Relatório</button>
+    <h1>Cálculo de Dimensionamento de Pavimento Flexível</h1>
+    <p>Este sistema foi desenvolvido por Gabriella Padilha sob orientação do professor Pedro, como parte do projeto de mestrado.</p>
+
+    <form method="POST">
+        <label>Módulo de reação da sub-base (Ce):</label>
+        <input type="number" step="any" name="ce" required><br>
+        <label>Fator de tráfego (TR):</label>
+        <input type="number" step="any" name="tr" required><br>
+        <label>Número de solicitações (N):</label>
+        <input type="number" step="any" name="n" required><br>
+        <label>Fator de capacidade de suporte (fcn):</label>
+        <input type="number" step="any" name="fcn" required><br><br>
+        <input type="submit" value="Calcular">
     </form>
+
+    {% if resultado %}
+        <h2>Resultado:</h2>
+        <p>Espessura calculada da camada: {{ resultado }}</p>
+    {% endif %}
+
+    <h2>Tabela do DNIT:</h2>
+    <img src="{{ url_for('static', filename='tabela_dnit.png') }}" alt="Tabela do DNIT" style="max-width:100%;">
+    <footer>
+        <p>Projeto desenvolvido por Gabriella Padilha - Mestrado PPGES - UPE</p>
+    </footer>
 </body>
 </html>
