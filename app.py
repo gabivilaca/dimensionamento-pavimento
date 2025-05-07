@@ -1,29 +1,21 @@
 
 from flask import Flask, render_template, request
-
 app = Flask(__name__)
 
-@app.route("/", methods=["GET", "POST"])
+@app.route('/', methods=['GET', 'POST'])
 def index():
     resultado = None
-    if request.method == "POST":
+    if request.method == 'POST':
         try:
-            N = float(request.form["N"])
-            CBRn = float(request.form["CBRn"])
-            CBRsb = float(request.form["CBRsb"])
-            KR = float(request.form["KR"])
-            KB = float(request.form["KB"])
-            KSB = float(request.form["KSB"])
-
-            Hr = KR * (77.67 * (N ** 0.0442) * (CBRn ** -0.548))
-            Hb = KB * (77.67 * (N ** 0.0442) * (CBRsb ** -0.548))
-            Hsb = KSB * (77.67 * (N ** 0.0442) * (CBRsb ** -0.548))
-
-            resultado = {
-                "Hr": round(Hr, 2),
-                "Hb": round(Hb, 2),
-                "Hsb": round(Hsb, 2),
-            }
+            # Cálculo simplificado apenas para exemplo
+            trafego = float(request.form['trafego'])
+            cbr = float(request.form['cbr'])
+            modulo = float(request.form['modulo'])
+            coeficiente = float(request.form['coeficiente'])
+            camada = float(request.form['camada'])
+            fatork = float(request.form['fatork'])
+            espessura = round(trafego * coeficiente / (cbr * fatork + modulo + camada), 2)
+            resultado = f"Espessura calculada: {espessura} cm"
         except Exception as e:
-            resultado = {"erro": str(e)}
-    return render_template("index.html", resultado=resultado)
+            resultado = f"Erro nos cálculos: {str(e)}"
+    return render_template('index.html', resultado=resultado)

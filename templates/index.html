@@ -3,52 +3,38 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Dimensionamento de Pavimento Flexível</title>
+    <title>Dimensionamento de Pavimento</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <img src="{{ url_for('static', filename='logo_ppges.png') }}" style="height: 50px;">
-    <img src="{{ url_for('static', filename='logo_poli.png') }}" style="height: 50px;">
-    <h1>Dimensionamento de Pavimento Flexível</h1>
-    <p>Este sistema foi desenvolvido por Gabriella Padilha sob orientação do professor Pedro, como parte do projeto de mestrado.</p>
+    <div class="container">
+        <header>
+            <img src="{{ url_for('static', filename='logo_upe.png') }}" style="height: 80px;">
+            <img src="{{ url_for('static', filename='logo_ppges.png') }}" style="height: 80px;">
+        </header>
+        <h2>Ferramenta para cálculo da espessura do pavimento flexível</h2>
+        <p>Esta ferramenta tem como objetivo auxiliar no cálculo da espessura das camadas que compõem o pavimento flexível, com base nos parâmetros técnicos definidos pelo DNIT. É um sistema interativo criado para fins educacionais PPGES - POLI/UPE.</p>
 
-    <form method="POST">
-        <label>N (Número de Repetições de Carga):</label><br>
-        <input type="number" name="N" required><br>
+        <form method="post">
+            <input type="number" name="trafego" step="any" placeholder="Tráfego (eixos)">
+            <input type="number" name="cbr" step="any" placeholder="CBR (%)">
+            <input type="number" name="modulo" step="any" placeholder="Módulo de Resiliência">
+            <input type="number" name="coeficiente" step="any" placeholder="Coeficiente Estrutural">
+            <input type="number" name="camada" step="any" placeholder="Espessura Inicial (cm)">
+            <input type="number" name="fatork" step="any" placeholder="Fator K">
+            <button type="submit">Calcular</button>
+        </form>
 
-        <label>CBRn (CBR da camada de Reforço):</label><br>
-        <input type="number" name="CBRn" required><br>
+        <div class="resultado">{{ resultado }}</div>
 
-        <label>CBRSB (CBR do Subleito):</label><br>
-        <input type="number" name="CBRsb" required><br>
+        <section>
+            <h3>Tabela do DNIT</h3>
+            <img src="{{ url_for('static', filename='tabela_dnit.png') }}" alt="Tabela do DNIT" style="width: 100%;">
+        </section>
 
-        <label>KR (Constante da Camada de Reforço):</label><br>
-        <input type="number" name="KR" required><br>
-
-        <label>KB (Constante da Base):</label><br>
-        <input type="number" name="KB" required><br>
-
-        <label>KSB (Constante do Subleito):</label><br>
-        <input type="number" name="KSB" required><br>
-
-        <button type="submit">Calcular</button>
-    </form>
-
-    {% if resultado %}
-        <h2>Resultados:</h2>
-        {% if resultado.erro %}
-            <p style="color:red;">Erro: {{ resultado.erro }}</p>
-        {% else %}
-            <p>Altura da Camada de Reforço (Hr): {{ resultado.Hr }} cm</p>
-            <p>Altura da Base (Hb): {{ resultado.Hb }} cm</p>
-            <p>Altura do Subleito (Hsb): {{ resultado.Hsb }} cm</p>
-        {% endif %}
-    {% endif %}
-
-    <img src="{{ url_for('static', filename='tabela_dnit.png') }}" style="margin-top: 20px; width: 90%;">
-
-    <footer style="margin-top: 30px;">
-        <p>Sistema desenvolvido por Gabriella Padilha — Orientação: Prof. Pedro</p>
-    </footer>
+        <footer>
+            Desenvolvido por Maria Gabriella Vilaça | Orientação: Prof. Dr. Pedro Oliveira | POLI - PPGES/UPE
+        </footer>
+    </div>
 </body>
 </html>
