@@ -7,39 +7,48 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <header>
-        <img src="{{ url_for('static', filename='logo_ppges.png') }}" alt="Logo PPGES">
-        <img src="{{ url_for('static', filename='logo_poli.png') }}" alt="Logo POLI">
-    </header>
+    <img src="{{ url_for('static', filename='logo_ppges.png') }}" style="height: 50px;">
+    <img src="{{ url_for('static', filename='logo_poli.png') }}" style="height: 50px;">
     <h1>Dimensionamento de Pavimento Flexível</h1>
-    <p class="descricao">Este sistema tem como objetivo auxiliar no cálculo da espessura de camadas do pavimento flexível com base em parâmetros fornecidos. Desenvolvido por Gabriella Vilaca, sob orientação do Prof. Pedro, no âmbito do PPGES - UPE.</p>
-    <form method="post">
-        <label>N (Número de Repetições de Carga):</label><input type="text" name="N"><br>
-        <label>CBRn (CBR da camada de Reforço):</label><input type="text" name="CBRn"><br>
-        <label>CBRSB (CBR do Subleito):</label><input type="text" name="CBRsb"><br>
-        <label>KR (Constante da Camada de Reforço):</label><input type="text" name="KR"><br>
-        <label>KB (Constante da Base):</label><input type="text" name="KB"><br>
-        <label>KSB (Constante do Subleito):</label><input type="text" name="KSB"><br>
+    <p>Este sistema foi desenvolvido por Gabriella Padilha sob orientação do professor Pedro, como parte do projeto de mestrado.</p>
+
+    <form method="POST">
+        <label>N (Número de Repetições de Carga):</label><br>
+        <input type="number" name="N" required><br>
+
+        <label>CBRn (CBR da camada de Reforço):</label><br>
+        <input type="number" name="CBRn" required><br>
+
+        <label>CBRSB (CBR do Subleito):</label><br>
+        <input type="number" name="CBRsb" required><br>
+
+        <label>KR (Constante da Camada de Reforço):</label><br>
+        <input type="number" name="KR" required><br>
+
+        <label>KB (Constante da Base):</label><br>
+        <input type="number" name="KB" required><br>
+
+        <label>KSB (Constante do Subleito):</label><br>
+        <input type="number" name="KSB" required><br>
+
         <button type="submit">Calcular</button>
     </form>
+
     {% if resultado %}
+        <h2>Resultados:</h2>
         {% if resultado.erro %}
-            <p class="erro">Erro: {{ resultado.erro }}</p>
+            <p style="color:red;">Erro: {{ resultado.erro }}</p>
         {% else %}
-            <div class="resultado">
-                <h2>Resultado do Dimensionamento</h2>
-                <p>Hn (Reforço): {{ resultado.Hn }} cm</p>
-                <p>Hb (Base): {{ resultado.Hb }} cm</p>
-                <p>Hsb (Subleito): {{ resultado.Hsb }} cm</p>
-            </div>
+            <p>Altura da Camada de Reforço (Hr): {{ resultado.Hr }} cm</p>
+            <p>Altura da Base (Hb): {{ resultado.Hb }} cm</p>
+            <p>Altura do Subleito (Hsb): {{ resultado.Hsb }} cm</p>
         {% endif %}
     {% endif %}
-    <div class="tabela">
-        <h2>Tabela do DNIT</h2>
-        <img src="{{ url_for('static', filename='tabela_dnit.png') }}" alt="Tabela DNIT" style="width:100%;max-width:800px;">
-    </div>
-    <footer>
-        <p>Desenvolvido por Gabriella Vilaca – Orientação Prof. Pedro | POLI – PPGES/UPE</p>
+
+    <img src="{{ url_for('static', filename='tabela_dnit.png') }}" style="margin-top: 20px; width: 90%;">
+
+    <footer style="margin-top: 30px;">
+        <p>Sistema desenvolvido por Gabriella Padilha — Orientação: Prof. Pedro</p>
     </footer>
 </body>
 </html>
