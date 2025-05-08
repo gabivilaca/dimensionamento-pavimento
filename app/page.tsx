@@ -1,4 +1,5 @@
 
+'use client';
 import React, { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -53,19 +54,17 @@ export default function Home() {
       </p>
 
       <div className="grid grid-cols-3 gap-4">
-        
-    [
-      { name: 'N', label: 'Número de solicitações (N)' },
-      { name: 'CBRn', label: 'CBR Subleito (CBRn)' },
-      { name: 'CBRSB', label: 'CBR Sub-base (CBRSB)' },
-      { name: 'KR', label: 'KR (Coef. Revestimento)' },
-      { name: 'KB', label: 'KB (Coef. Base)' },
-      { name: 'KSB', label: 'KSB (Coef. Sub-base)' },
-    ].map(({ name, label }) => (
-
-          <div key={key}>
-            <Label htmlFor={key}>{key}</Label>
-            <Input id={key} name={key} value={inputs[key]} onChange={handleChange} type="number" />
+        {[
+          { name: 'N', label: 'Número de solicitações (N)' },
+          { name: 'CBRn', label: 'CBR Subleito (CBRn)' },
+          { name: 'CBRSB', label: 'CBR Sub-base (CBRSB)' },
+          { name: 'KR', label: 'KR (Coef. Revestimento)' },
+          { name: 'KB', label: 'KB (Coef. Base)' },
+          { name: 'KSB', label: 'KSB (Coef. Sub-base)' },
+        ].map(({ name, label }) => (
+          <div key={name}>
+            <Label htmlFor={name}>{label}</Label>
+            <Input id={name} name={name} value={inputs[name]} onChange={handleChange} type="number" />
           </div>
         ))}
       </div>
