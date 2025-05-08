@@ -6,6 +6,13 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 
 const calcularEspessuras = ({ N, CBRn, CBRSB, KR, KB, KSB }) => {
+  N = Number(N);
+  CBRn = Number(CBRn);
+  CBRSB = Number(CBRSB);
+  KR = Number(KR);
+  KB = Number(KB);
+  KSB = Number(KSB);
+
   let R;
   if (N <= 1e6) R = 5;
   else if (N <= 5e6) R = 7.5;
@@ -29,7 +36,7 @@ export default function Home() {
   const [resultados, setResultados] = useState(null);
 
   const handleChange = (e) => {
-    setInputs({ ...inputs, [e.target.name]: parseFloat(e.target.value) || '' });
+    setInputs({ ...inputs, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = () => {
@@ -41,18 +48,18 @@ export default function Home() {
   };
 
   return (
-    <main className="p-6 space-y-6">
-      <div className="flex justify-between items-center">
+    <main className="p-6 max-w-4xl mx-auto text-center space-y-6">
+      <div className="flex justify-center items-center space-x-4">
         <img src="/upe_poli.png" alt="Logo POLI/UPE" className="h-16" />
         <img src="/ppges.png" alt="Logo PPGES" className="h-16" />
       </div>
 
-      <p className="text-center text-sm text-gray-700 max-w-3xl mx-auto">
+      <p className="text-sm text-gray-700 max-w-3xl mx-auto">
         Esta ferramenta foi desenvolvida para auxiliar no cálculo das espessuras das camadas de pavimentos flexíveis,
         com base nas diretrizes do DNIT. Insira os parâmetros abaixo para visualizar os resultados e o gráfico das camadas.
       </p>
 
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto text-left">
         {[
           { name: 'N', label: 'Número de solicitações (N)' },
           { name: 'CBRn', label: 'CBR Subleito (CBRn)' },
@@ -72,40 +79,25 @@ export default function Home() {
         <img src="/tabela_dnit.png" alt="Tabela do DNIT" className="mx-auto max-w-full" />
       </div>
 
-      <Button onClick={handleSubmit} className="w-full mt-4">Calcular Espessuras</Button>
+      <Button onClick={handleSubmit} className="w-full sm:w-auto mt-4">Calcular Espessuras</Button>
 
       {resultados && (
         <div className="space-y-4">
-          <h3 className="text-lg font-medium">Resultados:</h3>
-          <ul>
+          <h3 className="text-lg font-medium mt-6">Resultados:</h3>
+          <ul className="text-left inline-block">
             <li><strong>Revestimento (R):</strong> {resultados.R} cm</li>
             <li><strong>Base (B):</strong> {resultados.B.toFixed(2)} cm</li>
             <li><strong>Sub-base (h20):</strong> {resultados.h20.toFixed(2)} cm</li>
           </ul>
 
-          <div className="h-60 w-48 mx-auto relative">
-            <div
-              className="absolute bottom-0 w-full bg-gray-500 text-white text-center text-xs"
-              style={{ height: `${resultados.h20 * 2}px` }}
-            >
+          <div className="h-60 w-48 mx-auto relative flex flex-col-reverse items-stretch border">
+            <div className="bg-gray-500 text-white text-center text-xs" style={{ height: `${resultados.h20 * 2}px` }}>
               Sub-base
             </div>
-            <div
-              className="absolute w-full bg-gray-400 text-white text-center text-xs"
-              style={{
-                height: `${resultados.B * 2}px`,
-                bottom: `${resultados.h20 * 2}px`,
-              }}
-            >
+            <div className="bg-gray-400 text-white text-center text-xs" style={{ height: `${resultados.B * 2}px` }}>
               Base
             </div>
-            <div
-              className="absolute w-full bg-gray-300 text-black text-center text-xs"
-              style={{
-                height: `${resultados.R * 2}px`,
-                bottom: `${(resultados.h20 + resultados.B) * 2}px`,
-              }}
-            >
+            <div className="bg-gray-300 text-black text-center text-xs" style={{ height: `${resultados.R * 2}px` }}>
               Revestimento
             </div>
           </div>
