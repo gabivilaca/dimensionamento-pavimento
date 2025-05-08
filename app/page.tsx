@@ -24,7 +24,7 @@ const calcularEspessuras = ({ N, CBRn, CBRSB, KR, KB, KSB }) => {
   return { R, B, h20 };
 };
 
-export default function DimensionamentoPavimento() {
+export default function Home() {
   const [inputs, setInputs] = useState({ N: '', CBRn: '', CBRSB: '', KR: '', KB: '', KSB: '' });
   const [resultados, setResultados] = useState(null);
 
@@ -41,7 +41,7 @@ export default function DimensionamentoPavimento() {
   };
 
   return (
-    <div className="p-6 space-y-6">
+    <main className="p-6 space-y-6">
       <div className="flex justify-between items-center">
         <img src="/upe_poli.png" alt="Logo POLI/UPE" className="h-16" />
         <img src="/ppges.png" alt="Logo PPGES" className="h-16" />
@@ -53,7 +53,16 @@ export default function DimensionamentoPavimento() {
       </p>
 
       <div className="grid grid-cols-3 gap-4">
-        {['N', 'CBRn', 'CBRSB', 'KR', 'KB', 'KSB'].map((key) => (
+        
+    [
+      { name: 'N', label: 'Número de solicitações (N)' },
+      { name: 'CBRn', label: 'CBR Subleito (CBRn)' },
+      { name: 'CBRSB', label: 'CBR Sub-base (CBRSB)' },
+      { name: 'KR', label: 'KR (Coef. Revestimento)' },
+      { name: 'KB', label: 'KB (Coef. Base)' },
+      { name: 'KSB', label: 'KSB (Coef. Sub-base)' },
+    ].map(({ name, label }) => (
+
           <div key={key}>
             <Label htmlFor={key}>{key}</Label>
             <Input id={key} name={key} value={inputs[key]} onChange={handleChange} type="number" />
@@ -83,6 +92,6 @@ export default function DimensionamentoPavimento() {
           </div>
         </div>
       )}
-    </div>
+    </main>
   );
 }
