@@ -1,4 +1,3 @@
-
 'use client';
 import React, { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
@@ -48,9 +47,9 @@ export default function Home() {
         <img src="/ppges.png" alt="Logo PPGES" className="h-16" />
       </div>
 
-      <p className="text-center text-sm text-gray-700">
-        Esta ferramenta foi desenvolvida para auxiliar no cálculo das espessuras das camadas de pavimentos flexíveis, com base nas diretrizes do DNIT. 
-        Insira os parâmetros abaixo para visualizar os resultados e o gráfico das camadas.
+      <p className="text-center text-sm text-gray-700 max-w-3xl mx-auto">
+        Esta ferramenta foi desenvolvida para auxiliar no cálculo das espessuras das camadas de pavimentos flexíveis,
+        com base nas diretrizes do DNIT. Insira os parâmetros abaixo para visualizar os resultados e o gráfico das camadas.
       </p>
 
       <div className="grid grid-cols-3 gap-4">
@@ -69,11 +68,11 @@ export default function Home() {
         ))}
       </div>
 
-      <div>
-        <img src="/tabela_dnit.png" alt="Tabela do DNIT" className="mx-auto" />
+      <div className="mt-4">
+        <img src="/tabela_dnit.png" alt="Tabela do DNIT" className="mx-auto max-w-full" />
       </div>
 
-      <Button onClick={handleSubmit} className="w-full">Calcular Espessuras</Button>
+      <Button onClick={handleSubmit} className="w-full mt-4">Calcular Espessuras</Button>
 
       {resultados && (
         <div className="space-y-4">
@@ -85,12 +84,37 @@ export default function Home() {
           </ul>
 
           <div className="h-60 w-48 mx-auto relative">
-            <div className="absolute bottom-0 w-full bg-gray-500 text-white text-center" style={{ height: `${resultados.h20 * 2}px` }}>Sub-base</div>
-            <div className="absolute bottom-[${resultados.h20 * 2}px] w-full bg-gray-400 text-white text-center" style={{ height: `${resultados.B * 2}px` }}>Base</div>
-            <div className="absolute bottom-[${(resultados.h20 + resultados.B) * 2}px] w-full bg-gray-300 text-black text-center" style={{ height: `${resultados.R * 2}px` }}>Revestimento</div>
+            <div
+              className="absolute bottom-0 w-full bg-gray-500 text-white text-center text-xs"
+              style={{ height: `${resultados.h20 * 2}px` }}
+            >
+              Sub-base
+            </div>
+            <div
+              className="absolute w-full bg-gray-400 text-white text-center text-xs"
+              style={{
+                height: `${resultados.B * 2}px`,
+                bottom: `${resultados.h20 * 2}px`,
+              }}
+            >
+              Base
+            </div>
+            <div
+              className="absolute w-full bg-gray-300 text-black text-center text-xs"
+              style={{
+                height: `${resultados.R * 2}px`,
+                bottom: `${(resultados.h20 + resultados.B) * 2}px`,
+              }}
+            >
+              Revestimento
+            </div>
           </div>
         </div>
       )}
+
+      <footer className="text-center text-xs text-gray-600 mt-10 mb-4">
+        Ferramenta desenvolvida por Gabriella Vilaça, sob orientação do Prof. Pedro Eugênio – PPGES / Escola Politécnica da UPE.
+      </footer>
     </main>
   );
-} 
+}
