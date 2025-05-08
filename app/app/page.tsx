@@ -6,18 +6,22 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 
 const calcularEspessuras = ({ N, CBRn, CBRSB, KR, KB, KSB }) => {
+  // Determinar espessura do revestimento conforme tabela do DNIT
   let R;
   if (N <= 1e6) R = 5;
   else if (N <= 5e6) R = 7.5;
   else if (N <= 1e7) R = 10;
   else R = 12.5;
 
+  // Fórmulas oficiais do DNIT para Ht (H20 e Hn)
   const H20 = 77.67 * Math.pow(N, 0.0482) * Math.pow(CBRSB, -0.598);
   const Hn = 77.67 * Math.pow(N, 0.0482) * Math.pow(CBRn, -0.598);
 
+  // Espessura da base
   let B = (H20 - R * KR) / KB;
   if (B <= 15) B = 15;
 
+  // Espessura da sub-base
   let h20 = (Hn - R * KR - B * KB) / KSB;
   if (h20 <= 15) h20 = 15;
 
