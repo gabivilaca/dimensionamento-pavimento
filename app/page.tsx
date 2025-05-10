@@ -91,13 +91,13 @@ export default function Home() {
           </ul>
 
           <div className="h-60 w-48 mx-auto relative flex flex-col-reverse items-stretch border">
-            <div className="bg-gray-500 text-white text-center text-xs" style={{ height: `${resultados.h20 * 2}px` }}>
+            <div className="bg-gray-500 text-black text-center text-xs" style={{ height: `${resultados.h20 * 2}px`, minHeight: '10px' }}>
               Sub-base
             </div>
-            <div className="bg-gray-400 text-white text-center text-xs" style={{ height: `${resultados.B * 2}px` }}>
+            <div className="bg-gray-400 text-black text-center text-xs" style={{ height: `${resultados.B * 2}px` , minHeight: '100px'}}>
               Base
             </div>
-            <div className="bg-gray-300 text-black text-center text-xs" style={{ height: `${resultados.R * 2}px` }}>
+            <div className="bg-gray-300 text-black text-center text-xs" style={{ height: `${resultados.R * 2}px`, minHeight: '100px' }}>
               Revestimento
             </div>
           </div>
