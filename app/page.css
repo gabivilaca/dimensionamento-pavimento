@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
+
+.header-title {
+  font-size: 1.25rem; /* Equivalent to Tailwind's text-lg */
+  font-weight: 500; /* Equivalent to Tailwind's font-medium */
+  margin-bottom: 1rem; /* Equivalent to Tailwind's mb-4 */
+  color: #1e40af; /* Equivalent to Tailwind's text-blue-800 */
+  text-align: center;
+}
+
+.grid-container {
+display: grid;
+grid-template-columns: 1fr; /* Single column by default */
+gap: 16px; /* Space between grid items */
+justify-items: center; /* Center items horizontally */
+}
+
+@media (min-width: 640px) {
+.grid-container {
+    grid-template-columns: repeat(3, 1fr); /* 3 columns on small screens and above */
+}
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+.header-logos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem; /* Space between logos */
+  margin-bottom: 1rem;
+}
+
+.header-logo {
+  height: 64px; /* Equivalent to Tailwind's h-16 */
+  object-fit: contain; /* Ensure logos maintain their aspect ratio */
+}
+
+.header-title {
+  font-size: 2rem; /* Equivalent to Tailwind's text-3xl */
+  font-weight: bold; /* Equivalent to Tailwind's font-bold */
+  color: #1f2937; /* Equivalent to Tailwind's text-gray-800 */
+  margin-bottom: 1rem;
+}
+
+.header-description {
+  font-size: 1rem; /* Equivalent to Tailwind's text-base */
+  color: #4b5563; /* Equivalent to Tailwind's text-gray-600 */
+  max-width: 48rem; /* Equivalent to Tailwind's max-w-3xl */
+  margin: 0 auto; /* Center the text */
+  line-height: 1.5; /* Improve readability */
+}
+
+.header-description2 {
+  font-size: 0.75rem; /* Equivalent to Tailwind's text-base */
+  color: #4b5563; /* Equivalent to Tailwind's text-gray-600 */
+  max-width: 48rem; /* Equivalent to Tailwind's max-w-3xl */
+  margin: 0 auto; /* Center the text */
+  line-height: 1.5; /* Improve readability */
+}
+
+body {
+  background-color: #1f2937; /* Dark gray background */
+  color: #f9fafb; /* Light text color for contrast */
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif; /* Optional: Set a default font */
+}
+  
+main {
+  background-color: #ffffff; /* White background for the content */
+  border-radius: 8px; /* Rounded corners for the content area */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for the content */
+  padding: 20px;
+  max-width: 1000px;
+  margin: 40px auto; /* Center the content vertically and horizontally */
+}
+
+  /* Container for the layered columns */
+.layered-columns {
+  width: 200px; /* Adjust the width of the column container */
+  margin: 20px auto; /* Center the container horizontally */
+  border: 1px solid #d1d5db; /* Light gray border */
+  border-radius: 8px; /* Rounded corners */
+  overflow: hidden; /* Ensure layers don't overflow the container */
+  display: flex;
+  flex-direction: column-reverse; /* Stack layers from bottom to top */
+}
+
+/* Common styles for all layers */
+.layer {
+  text-align: center;
+  font-size: 12px; /* Small text size */
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Specific styles for each layer */
+.sub-base {
+  background-color: #aeb4b2; /* Green for Sub-base */
+}
+
+.base {
+  background-color: #6c6d6c; /* Lighter green for Base */
+}
+
+.revestimento {
+  background-color: #3e4442; /* Lightest green for Revestimento */
+}

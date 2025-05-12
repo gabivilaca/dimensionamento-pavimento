@@ -1,9 +1,10 @@
 'use client';
 import React, { useState } from 'react';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
+import "./page.css";
 
 const calcularEspessuras = ({ N, CBRn, CBRSB, KR, KB, KSB }) => {
   N = Number(N);
@@ -48,64 +49,70 @@ export default function Home() {
   };
 
   return (
-    <main className="p-6 max-w-4xl mx-auto text-center space-y-6">
-      <div className="flex justify-center items-center space-x-4">
-        <img src="/upe_poli.png" alt="Logo POLI/UPE" className="h-16" />
-        <img src="/ppges.png" alt="Logo PPGES" className="h-16" />
-      </div>
+    <main className="p-6 max-w-4xl mx-auto space-y-8">
+      {/* Header Section */}
+      <header className="header">
+        <div className="header-logos">
+          <img src="/upe_poli.png" alt="Logo POLI/UPE" className="header-logo" />
+          <img src="/ppges.png" alt="Logo PPGES" className="header-logo" />
+        </div>
+        <h1 className="header-title">Dimensionamento de Pavimentos Flexíveis</h1>
+        <p className="header-description">
+          Esta ferramenta foi desenvolvida para auxiliar no cálculo das espessuras das camadas de pavimentos flexíveis,
+          com base nas diretrizes do DNIT. Insira os parâmetros abaixo para visualizar os resultados e o gráfico das camadas.
+        </p>
+      </header>
 
-      <p className="text-sm text-gray-700 max-w-3xl mx-auto">
-        Esta ferramenta foi desenvolvida para auxiliar no cálculo das espessuras das camadas de pavimentos flexíveis,
-        com base nas diretrizes do DNIT. Insira os parâmetros abaixo para visualizar os resultados e o gráfico das camadas.
-      </p>
+      {/* Input Form Section */}
+      <Card>
+        <h2 className="header-title">Parâmetros de Entrada</h2>
+        <div className="grid-container">
+          {[
+            { name: 'N', label: 'Número de solicitações (N)' },
+            { name: 'CBRn', label: 'CBR Subleito (CBRn)' },
+            { name: 'CBRSB', label: 'CBR Sub-base (CBRSB)' },
+            { name: 'KR', label: 'KR (Coef. Revestimento)' },
+            { name: 'KB', label: 'KB (Coef. Base)' },
+            { name: 'KSB', label: 'KSB (Coef. Sub-base)' },
+          ].map(({ name, label }) => (
+            <div key={name} className="text-center">
+              <Label htmlFor={name} className="text-blue-700">{label}</Label>
+              <Input id={name} name={name} value={inputs[name]} onChange={handleChange} type="number" className="border-blue-300" />
+            </div>
+          ))}
+        </div>
+        <Button onClick={handleSubmit} className="w-full sm:w-auto mt-6 bg-blue-500 hover:bg-blue-600 text-white">
+          Calcular Espessuras
+        </Button>
+      </Card>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto text-left">
-        {[
-          { name: 'N', label: 'Número de solicitações (N)' },
-          { name: 'CBRn', label: 'CBR Subleito (CBRn)' },
-          { name: 'CBRSB', label: 'CBR Sub-base (CBRSB)' },
-          { name: 'KR', label: 'KR (Coef. Revestimento)' },
-          { name: 'KB', label: 'KB (Coef. Base)' },
-          { name: 'KSB', label: 'KSB (Coef. Sub-base)' },
-        ].map(({ name, label }) => (
-          <div key={name}>
-            <Label htmlFor={name}>{label}</Label>
-            <Input id={name} name={name} value={inputs[name]} onChange={handleChange} type="number" />
-          </div>
-        ))}
-      </div>
-
-      <div className="mt-4">
-        <img src="/tabela_dnit.png" alt="Tabela do DNIT" className="mx-auto max-w-full" />
-      </div>
-
-      <Button onClick={handleSubmit} className="w-full sm:w-auto mt-4">Calcular Espessuras</Button>
-
+      {/* Results Section */}
       {resultados && (
-        <div className="space-y-4">
-          <h3 className="text-lg font-medium mt-6">Resultados:</h3>
-          <ul className="text-left inline-block">
-            <li><strong>Revestimento (R):</strong> {resultados.R} cm</li>
-            <li><strong>Base (B):</strong> {resultados.B.toFixed(2)} cm</li>
-            <li><strong>Sub-base (h20):</strong> {resultados.h20.toFixed(2)} cm</li>
+        <Card className="p-6 shadow-lg bg-gradient-to-r from-green-100 to-green-50 rounded-lg">
+          <h2 className="header-description2">Resultados</h2>
+          <ul className="header-description2">
+            <p><strong>Revestimento (R):</strong> {resultados.R} cm</p>
+            <p><strong>Base (B):</strong> {resultados.B.toFixed(2)} cm</p>
+            <p><strong>Sub-base (h20):</strong> {resultados.h20.toFixed(2)} cm</p>
           </ul>
 
-          <div className="h-60 w-48 mx-auto relative flex flex-col-reverse items-stretch border">
-            <div className="bg-gray-500 text-black text-center text-xs" style={{ height: `${resultados.h20 * 2}px`, minHeight: '10px' }}>
+          <div className="layered-columns">
+            <div className="sub-base" style={{ height: `${resultados.h20 * 2}px`, minHeight: '10px' }}>
               Sub-base
             </div>
-            <div className="bg-gray-400 text-black text-center text-xs" style={{ height: `${resultados.B * 2}px` , minHeight: '100px'}}>
+            <div className="base" style={{ height: `${resultados.B * 2}px`, minHeight: '100px' }}>
               Base
             </div>
-            <div className="bg-gray-300 text-black text-center text-xs" style={{ height: `${resultados.R * 2}px`, minHeight: '100px' }}>
+            <div className="revestimento" style={{ height: `${resultados.R * 2}px`, minHeight: '100px' }}>
               Revestimento
             </div>
           </div>
-        </div>
+        </Card>
       )}
 
-      <footer className="text-center text-xs text-gray-600 mt-10 mb-4">
-        Ferramenta desenvolvida por Gabriella Vilaça, sob orientação do Prof. Pedro Eugênio – PPGES / Escola Politécnica da UPE.
+      {/* Footer Section */}
+      <footer>
+        <p className="header-description2">Ferramenta desenvolvida por Gabriella Vilaça, sob orientação do Prof. Pedro Eugênio – PPGES / Escola Politécnica da UPE.</p>
       </footer>
     </main>
   );

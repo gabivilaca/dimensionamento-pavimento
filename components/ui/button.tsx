@@ -1,8 +1,23 @@
+import React from 'react';
+import './button.css'; // Import the raw CSS file
 
-export function Button({ children, ...props }) {
+export const Button = ({
+  children,
+  onClick,
+  className = '',
+  ...props
+}: {
+  children: React.ReactNode;
+  onClick?: () => void;
+  className?: string;
+}) => {
   return (
-    <button {...props} className="bg-blue-600 text-white p-2 rounded w-full hover:bg-blue-700">
+    <button
+      onClick={onClick}
+      className={`button ${className}`} // Use the "button" class from the CSS file
+      {...props}
+    >
       {children}
     </button>
   );
-}
+};

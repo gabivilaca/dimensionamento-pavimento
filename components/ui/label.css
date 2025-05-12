@@ -1,0 +1,8 @@
+.label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #374151; /* Tailwind's gray-700 */
+    margin-bottom: 4px;
+    text-align: left;
+  }
