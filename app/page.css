@@ -40,8 +40,10 @@ justify-items: center; /* Center items horizontally */
 }
 
 .header-dnit {
-  height: 250px; /* Equivalent to Tailwind's h-16 */
-  object-fit: contain; /* Ensure logos maintain their aspect ratio */
+  width: 100%; /* Make the image take up the full width of the card */
+  height: auto; /* Maintain the aspect ratio */
+  object-fit: contain; /* Ensure the image fits within the card without distortion */
+  border-radius: 8px; /* Match the card's rounded corners */
 }
 
 .header-title {
