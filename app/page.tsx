@@ -61,6 +61,9 @@ export default function Home() {
           Esta ferramenta foi desenvolvida para auxiliar no cálculo das espessuras das camadas de pavimentos flexíveis,
           com base nas diretrizes do DNIT. Insira os parâmetros abaixo para visualizar os resultados e o gráfico das camadas.
         </p>
+        <Card>
+        <img src="/tabela_dnit.png" alt="Tabela DNIT" className="header-dnit" />
+        </Card>
       </header>
 
       {/* Input Form Section */}

@@ -39,6 +39,11 @@ justify-items: center; /* Center items horizontally */
   object-fit: contain; /* Ensure logos maintain their aspect ratio */
 }
 
+.header-dnit {
+  height: 250px; /* Equivalent to Tailwind's h-16 */
+  object-fit: contain; /* Ensure logos maintain their aspect ratio */
+}
+
 .header-title {
   font-size: 2rem; /* Equivalent to Tailwind's text-3xl */
   font-weight: bold; /* Equivalent to Tailwind's font-bold */
